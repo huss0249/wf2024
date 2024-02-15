@@ -1,113 +1,26 @@
-const myForm = document.querySelector("#myForm");
-const csvFile = document.querySelector("#csvFile");
-const $myData = document.querySelector(".myData");
+console.log(csv_source.length)
 
-/* Examples: fn = CSVToArray
-  fn("a,b\nc,d")                        > [['a', 'b'], ['c', 'd']];
-  fn("a;b\nc;d", ";")                   > [['a', 'b'], ['c', 'd']];
-  fn("col1,col2\na,b\nc,d", ",", true)  > [['a', 'b'], ['c', 'd']];
-*/
-//================================================================================
-
-function CSVstring_to_Array(data, delimiter = ",") {
-  // This variable will collect all the titles from the data variable ["Name", "Roll Number"]
-  const titles = data.slice(0, data.indexOf("\n")).split(delimiter);
-
-  // This variable will store the values from the data [ 'Rohan,01', 'Aryan,02' ]
-  const titleValues = data.slice(data.indexOf("\n") + 1).split("\n");
-
-  // Map function will iterate over all values of title values array and append each object at the end of the array
-  const ansArray = titleValues.map(function (v) {
-    // Values variable will store individual title values [ 'Rohan', '01' ]
-    const values = v.split(delimiter);
-
-    // storeKeyValue variable will store object containing each title with their respective values i.e { Name: 'Rohan', 'Roll Number': '01' }
-    const storeKeyValue = titles.reduce(function (obj, title, index) {
-      obj[title] = values[index];
-      return obj;
-    }, {});
-
-    return storeKeyValue;
-  });
-
-  return ansArray;
-}
-
-// var inputString1 = "Name,Roll Number\nRohan,01\nAryan,02";
-// console.log(CSVstring_to_Array(inputString1));
-
-// var inputString2 = "Name;Roll Number\nRohan;01\nAryan;02";
-// console.log(CSVstring_to_Array(inputString2, ";"));
+// const myForm = document.querySelector("#myForm")
+// const csvFile = document.querySelector("#csvFile")
+// const $myData = document.querySelector(".myData")
+const $myGrid = document.querySelector("#myGrid")
 
 //================================================================================
-// const CSVToArray = (data, delimiter = ",", omitFirstRow = false) =>
-//   data
-//     .slice(omitFirstRow ? data.indexOf("\n") + 1 : 0)
-//     .split("\n")
-//     .map((v) => v.split(delimiter));
+csv_source.forEach(el => {
+//   console.log(el)
+  for (let [key, value] of Object.entries(el)) {
+    key === 'ID' ? console.log(`${key}: ${value}`) : ''
+    console.log(`${key}: ${value}`)
+  }
+  console.log(' ')
+})
 
-const CSVToArray = (data, delimiter = ",", omitFirstRow = false) =>
-  data
-    .slice(omitFirstRow ? data.indexOf("\n") + 1 : 0)
-    .split("\n")
-    .map((v) => v.split(delimiter));
-//============
 
-const readCSV = (e) => {
-  e.preventDefault();
-  const input = csvFile.files[0];
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const text = e.target.result;
 
-    // $myData.innerText = CSVToArray(text, ",", true);
-    // $myData.innerText = text;
-    $myData.innerText = CSVstring_to_Array(text, ";", true);
-
-    // console.log(text.length, " | ", CSVToArray(text));
-    // console.log(CSVToArray(text, ",", true));
-    console.log(CSVstring_to_Array(text, ";"));
-  };
-  reader.readAsText(input);
-};
-
-myForm.addEventListener("submit", readCSV);
-// myForm.addEventListener("change", readCSV);
-
-//=====================================================================
-var inputString1 = "Name,Roll Number\nRohan,01\nAryan,02";
-// console.log(CSVstring_to_Array(inputString1));
-
-var inputString2 = "Name;Roll Number\nRohan;01\nAryan;02";
-// console.log(CSVstring_to_Array(inputString2, ";"));
-//=====================================================================
-
-// new LeaderLine(
-//   document.getElementById('start'),
-//   document.getElementById('end')
-// );
-
-/*
-let a = new LeaderLine(LeaderLine.mouseHoverAnchor(myForm), $myData, {
-  color: "red",
-  size: 4,
-  path: "arc",
-  startLabel: "START",
-  middleLabel: "MIDDLE",
-  endLabel: "END"
-});
-*/
-
-/*
-let a = new LeaderLine(myForm, $myData, {
-  color: "red",
-  size: 4,
-  path: "arc",
-  startLabel: "START",
-  middleLabel: "MIDDLE",
-  endLabel: "END"
-});
-*/
+/*================================================================================
+==================================================================================
+LEADER-LINE
+================================================================================*/
 
 let a = new LeaderLine(
   LeaderLine.mouseHoverAnchor(myForm, "draw", {
@@ -124,63 +37,10 @@ let a = new LeaderLine(
     middleLabel: "MIDDLE",
     endLabel: "END"
   }
-);
-// a.remove();
-
-const csv_source = [
-  {
-    'ID': "P100",
-    'Description': "Get course requirements",
-    'LINK': "http://google.com'",
-    'Next': "P200",
-    'Connector': "",
-    'Type': "Start",
-    'Function': "CLIENT",
-    'Phase': "init",
-    'ALT': "1"
-  },
-  {
-    'ID': "P200",
-    'Description': "Create course module",
-    'LINK': "http://canada.ca",
-    'Next': "P300",
-    'Connector': "",
-    'Type': "Document",
-    'Function': "PDC",
-    'Phase': "DESIGN",
-    'ALT': "2"
-  },
-  {
-    'ID': "P300",
-    'Description': "Module passes review?",
-    'LINK': "",
-    'Next': "P400 | P500",
-    'Connector': "Yes | No",
-    'Type': "Decision",
-    'Function': "PDC",
-    'Phase': "DEVELOP",
-    'ALT': "3"
-  },
-  {
-    'ID': "P400",
-    'Description': "Publish course",
-    'LINK': "",
-    'Next': "",
-    'Connector': "",
-    'Type': "Process",
-    'Function': "DEV",
-    'Phase': "IMPLEMENT",
-    'ALT': "4"
-  },
-  {
-    'ID': "P500",
-    'Description': "Address feedback",
-    'LINK': "",
-    'Next': "P400",
-    'Connector': "",
-    'Type': "Subprocess",
-    'Function': "DEV",
-    'Phase': "EVAL",
-    'ALT': "5"
-  }
-];
+  );
+  // a.remove();
+  
+  /*================================================================================
+  ==================================================================================
+  END LEADER-LINE
+  ================================================================================*/
