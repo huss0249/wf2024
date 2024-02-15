@@ -18,6 +18,8 @@
   
   
   <link rel="stylesheet" href="./style.css" />
+  <script src="./sample.js" defer=""></script>
+  <script src="./csv_importer.js" defer=""></script>
   <script src="./script.js" defer=""></script>
 
 
@@ -28,16 +30,17 @@
     <h1 class='p-1 text-light'>TDD CSV</h1>
   </header>
   
-  <div class='container bg-info p-5 mb-3'>
-    <form id="myForm">
-      <input type="file" id="csvFile" accept=".csv" />
+  <div class='container bg-light p-5 mb-3'>
+    <form id="myForm" class="'bg-info p-5 d-flex">
+      <input type="file" id="csvFile" accept=".csv" class="my-3" />
       <br />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" class="my-3" />
     </form>
   </div>
   
-  <div class='container bg-success'>
+  <div class='container bg-light'>
     <p class='myData'></p>
+    <div id='myGrid' class="container bg-info"></div>
   </div>
 
 </body>
