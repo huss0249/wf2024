@@ -97,9 +97,12 @@ $btns.forEach((el, index) => {
   console.log(fromm, too)
   
   // fromm != undefined && too != undefined ? window['m'+index] = new LeaderLine(
-  //   document.querySelector(fromm),
-  //   document.querySelector(too)
-  // ) : ''
+    
+  let $arrows = {}
+  fromm != undefined && too != undefined ? $arrows['m'+index] = new LeaderLine(
+    document.querySelector(fromm),
+    document.querySelector(too)
+  ) : ''
 });
 
 /*================================================================================
@@ -113,11 +116,11 @@ let a = new LeaderLine(
       duration: 3000
     }
   }),
-  $myData,
+  $myGrid,
   {
     color: "red",
     size: 4,
-    path: "arc",
+    path: "grid",
     startLabel: "START",
     middleLabel: "MIDDLE",
     endLabel: "END"
