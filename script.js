@@ -1,24 +1,43 @@
-// console.log(csv_source.length)
-
 const $myGrid = document.querySelector("#myGrid")
 
 $myGrid.classList.add("d-flex", "flex-column");
+
 //================================================================================
+
+let check_data = (flag) => {
+  let mark = ''
+  // flag != '' ? console.log('flag  = ', flag) : console.log('ffffff === ', flag)
+  flag != '' ? mark = 'filled' : ''
+  flag.includes(' | ') ? mark = 'double' : ''
+
+  console.log(mark)
+  // string.includes(substring)
+  // string.indexOf(substring) !== -1
+  return true
+}
+
 
 const fragment = new DocumentFragment();
 
 csv_source.forEach((el) => {
   for (let [key, value] of Object.entries(el)) {
-
+    
     if (key === "ID") {
       const $btn = document.createElement("button");
       $btn.id = value;
       $btn.type = "button";
       $btn.classList.add("m-3", "p-2", "bg-success");
-
+      
       $btn.textContent = el["Description"];
+      
+      let check_data_type = check_data(el["Next"])
 
+      // el["Next"] ? ($btn.dataset.next = el["Next"]) : "";
+      check_data_type ? ($btn.dataset.next = el["Next"]) : "";
+      
+      
       el["Next"] ? ($btn.dataset.next = el["Next"]) : "";
+
       el["Type"] ? ($btn.dataset.type = el["Type"]) : "";
       el["Function"] ? ($btn.dataset.function = el["Function"]) : "";
       el["Phase"] ? ($btn.dataset.phase = el["Phase"]) : "";
@@ -28,10 +47,10 @@ csv_source.forEach((el) => {
     }
   }
   $myGrid.append(fragment);
-
+  
 });
 
-
+//================================================================================
 
 let $btns = document.querySelectorAll('button')
 

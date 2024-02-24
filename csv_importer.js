@@ -1,9 +1,6 @@
-console.log(csv_source)
-
 const myForm = document.querySelector("#myForm")
 const csvFile = document.querySelector("#csvFile")
 const $myData = document.querySelector(".myData")
-// const $myGrid = document.querySelector("#myGrid")
 
 //================================================================================
 
@@ -50,7 +47,7 @@ const readCSV = (e) => {
     
     $myData.innerText = CSVstring_to_Array(text, ",", true);
     
-    console.log(CSVstring_to_Array(text, ","));
+    // console.log(CSVstring_to_Array(text, ","));
   };
   reader.readAsText(input);
 };

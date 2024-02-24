@@ -55,3 +55,6 @@ const csv_source = [
     'ALT': "5"
   }
 ];
+
+
+// console.log(csv_source.map((el) => el['Next'] === ''))
