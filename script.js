@@ -1,5 +1,3 @@
-//================================================================================
-
 let zones = ["A", "B", "C", "D"];
 let connectors = [];
 let types = [];
@@ -11,16 +9,12 @@ let steps = 8;
 let spacing = 3;
 
 //================================================================================
-
 const $myGrid = document.querySelector("#myGrid")
-
 $myGrid.classList.add(`p-${spacing}`, "d-flex", "flex-row", `gap-${spacing}`);
 
 //================================================================================
-
-//================================================================================
-
 // ID, Description, LINK, Next, Connector, Type, Function, Phase, ALT
+//================================================================================
 
 let zFragment = new DocumentFragment();
 let bFragment = new DocumentFragment();
