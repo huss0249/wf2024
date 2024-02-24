@@ -14,13 +14,13 @@ function CSVstring_to_Array(data, delimiter = ",") {
   console.log('titleValues=> ', titleValues)
   
   // Map function will iterate over all values of title values array and append each object at the end of the array
-  const ansArray = titleValues.map(function (v) {
+  const ansArray = titleValues.map((v) => {
     // Values variable will store individual title values [ 'Rohan', '01' ]
     const values = v.split(delimiter);
     console.log('values=> ', values)
     
     // storeKeyValue variable will store object containing each title with their respective values i.e { Name: 'Rohan', 'Roll Number': '01' }
-    const storeKeyValue = titles.reduce(function (obj, title, index) {
+    const storeKeyValue = titles.reduce( (obj, title, index) => {
       obj[title] = values[index];
       return obj;
     }, {});
