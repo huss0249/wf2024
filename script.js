@@ -52,34 +52,27 @@ zones.forEach((zone, index, zones) => {
         );
 
     $step.textContent = `${zone}${j}`;
-
     $step.dataset.address = `${zone}${j}`;
     $step.dataset.zone = zone;
     $step.dataset.step = j;
-
-    // console.log($step.dataset);
     bFragment.append($step);
   }
   $zone.append(bFragment);
-
   zFragment.append($zone);
 });
 $myGrid.append(zFragment);
 
 //================================================================================
-
-
-
 let check_data = (flag) => {
+  console.log('original flag => ', flag)
   let mark = ''
-  // flag != '' ? console.log('flag  = ', flag) : console.log('ffffff === ', flag)
-  flag != '' ? mark = 'filled' : ''
-  flag.includes(' | ') ? mark = 'double' : ''
-
-  console.log(mark)
-  // string.includes(substring)
-  // string.indexOf(substring) !== -1
-  return true
+  if ( flag != '' ) {
+    mark = 'filled'
+    if ( flag.includes(' | ') ) {
+      mark = 'double'
+    } 
+  } 
+  return mark
 }
 
 //================================================================================
@@ -106,6 +99,24 @@ csv_source.forEach((el) => {
       el["Type"] ? ($btn.dataset.type = el["Type"]) : "";
       el["Function"] ? ($btn.dataset.function = el["Function"]) : "";
       el["Phase"] ? ($btn.dataset.phase = el["Phase"]) : "";
+
+      // let connector_flag = check_data(el["Connector"])
+      // console.log('connector_flag => ', connector_flag)
+      let mark
+      if ( el["Connector"] ) {
+        // mark = 'filled'
+        if ( el["Connector"].includes(' | ') ) {
+          // console.log(el["Connector"].split(' | '))
+          // console.log(el["Next"].split(' | '))
+          el["Connector"] = el["Connector"].split(' | ')
+          el["Next"] = el["Next"].split(' | ')
+          mark = 'double'
+        }
+      } else {
+          el["Connector"] = "empty"
+         
+      }
+      console.log('el["Connector"] => ', el)
       el["Connector"]
         ? ($btn.dataset.connector = el["Connector"])
         : ($btn.dataset.connector = "default");
