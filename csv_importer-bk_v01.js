@@ -1,8 +1,6 @@
 const myForm = document.querySelector("#myForm")
 const csvFile = document.querySelector("#csvFile")
 const $myData = document.querySelector(".myData")
-const delimiter = ","
-const newline = "\n"
 
 //================================================================================
 
@@ -35,15 +33,10 @@ function CSVstring_to_Array(data, delimiter = ",") {
 
 //================================================================================
 
-// const CSVToArray = (data, delimiter = ",", omitFirstRow = false) =>
-// data
-// .slice(omitFirstRow ? data.indexOf("\n") + 1 : 0)
-// .split("\n")
-// .map((v) => v.split(delimiter));
-const CSVToArray = (data, delimiter, omitFirstRow = false) =>
+const CSVToArray = (data, delimiter = ",", omitFirstRow = false) =>
 data
-.slice(omitFirstRow ? data.indexOf(newline) + 1 : 0)
-.split(newline)
+.slice(omitFirstRow ? data.indexOf("\n") + 1 : 0)
+.split("\n")
 .map((v) => v.split(delimiter));
 
 //================================================================================
@@ -55,12 +48,9 @@ const readCSV = (e) => {
   reader.onload = function (e) {
     const text = e.target.result;
     
-    // $myData.innerText = CSVstring_to_Array(text, ",", true);
-    $myData.innerText = CSVToArray(text, ",", true);
+    $myData.innerText = CSVstring_to_Array(text, ",", true);
     
-    // console.log(CSVstring_to_Array(text, ","));
-    // console.log($myData.innerText);
-    console.log(text);
+    console.log(CSVstring_to_Array(text, ","));
   };
   reader.readAsText(input);
 };
