@@ -78,15 +78,6 @@ let check_data = (flag) => {
 //================================================================================
 const fragment = new DocumentFragment();
 
-const update_src = (flag) => {
-
-  // const csv_source = jsonObj
-  const csv_source = flag;
-  // console.log(csv_source.map((el) => el['Next'] === ''))
-  console.log(csv_source)
-  return csv_source
-}
-
 csv_source.forEach((el) => {
   // console.log("here");
   //   console.log(el)
@@ -174,7 +165,6 @@ let a = new LeaderLine(
   ==================================================================================
   END LEADER-LINE
   ================================================================================*/
-  /*
 let mm = new LeaderLine(
   document.querySelector("#P100"),
   document.querySelector("#P200"),
@@ -200,4 +190,3 @@ let mm2 = new LeaderLine(
     // endLabel: "END"
   }
 );
-*/

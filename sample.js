@@ -1,3 +1,4 @@
+/* 
 const csv_source = [
   {
     'ID': "P100",
@@ -55,6 +56,9 @@ const csv_source = [
     'ALT': "5"
   }
 ];
-
-
+*/
+/*
+const csv_source = [...jsonObj]
 // console.log(csv_source.map((el) => el['Next'] === ''))
+console.log(csv_source)
+*/
