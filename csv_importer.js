@@ -54,8 +54,20 @@ const keyMap = (arr_flag, key_flag, val_flag) => {
   console.log(max) // 5
 } */
 
+// const keyMax = (arr_flag, key_flag) => {
+//   let res = arr_flag.reduce(function(obj, el) {
+//     obj[el[`${key_flag}`]] = (obj[el[`${key_flag}`]] || 0) + 1;
+//     return obj;
+//   }, {})
+//   console.log('RES =====>', res)
+
+//   const max = Math.max.apply(null, Object.values(res));
+//   console.log(max)
+//   return max
+// }
+
 const keyMax = (arr_flag, key_flag) => {
-  let res = arr_flag.reduce(function(obj, el) {
+  let res = arr_flag.reduce((obj, el) => {
     obj[el[`${key_flag}`]] = (obj[el[`${key_flag}`]] || 0) + 1;
     return obj;
   }, {})
