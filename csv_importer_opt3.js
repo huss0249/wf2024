@@ -1,9 +1,31 @@
+
+    /*
+const obj = { a: 4, b: 0.5 , c: 0.35, d: 5 };
+const max = Math.max.apply(null, Object.values(obj));
+console.log(max) // 5
+    */
+
+
+
 const myForm = document.querySelector("#myForm");
 const fileInput = document.querySelector("#csvFile");
 const $myData = document.querySelector(".myData");
 const delimiter = ",";
 const newline = "\r\n";
 const jsonObj = [];
+
+//================================================================================
+
+let zones = ["A", "B", "C", "D"];
+let connectors = [];
+let types = [];
+let functions = [];
+let phases = [];
+let ranges = [2, 4, 7, 10];
+let modes = ["warning", "success", "secondary", "danger", "primary"];
+let steps = 8;
+let spacing = 3;
+
 //================================================================================
 /*
 const CSVToArray = (data, delimiter, omitFirstRow = false) =>
@@ -39,6 +61,28 @@ const readCSV = (e) => {
         });
         $myData.textContent = jsonObj;
         // return jsonObj;
+
+
+
+
+
+
+
+
+
+        
+        /* jsonObj.forEach((el) => {
+            let ee = el.map(m => m.key === 'Phase')
+            console.log('ee = ', ee)
+    })
+        console.log('jsonObj ====> ', aa) */
+
+
+
+
+
+
+
         update_src(jsonObj)
     });
 };
@@ -46,17 +90,7 @@ const readCSV = (e) => {
 myForm.addEventListener("change", readCSV);
 
 //================================================================================
-//================================================================================
 
-let zones = ["A", "B", "C", "D"];
-let connectors = [];
-let types = [];
-let functions = [];
-let phases = ["Initial", "Design", "Develop", "Deploy"];
-let ranges = [2, 4, 7, 10];
-let modes = ["warning", "success", "secondary", "danger", "primary"];
-let steps = 8;
-let spacing = 3;
 
 //================================================================================
 const $myGrid = document.querySelector("#myGrid")
@@ -65,8 +99,14 @@ $myGrid.classList.add(`p-${spacing}`, "d-flex", "flex-row", `gap-${spacing}`);
 //================================================================================
 // ID, Description, LINK, Next, Connector, Type, Function, Phase, ALT
 //================================================================================
-const makeZones = () => {
+const makeZones = (flag) => {
+    console.log('csv_source.length => ', flag.length)
 
+    /*
+const obj = { a: 4, b: 0.5 , c: 0.35, d: 5 };
+const max = Math.max.apply(null, Object.values(obj));
+console.log(max) // 5
+    */
 
 let zFragment = new DocumentFragment();
 let bFragment = new DocumentFragment();
@@ -126,13 +166,13 @@ const update_src = (flag) => {
   // const csv_source = jsonObj
   const csv_source = flag;
   // console.log(csv_source.map((el) => el['Next'] === ''))
-//   console.log(csv_source)
+//   console.log('csv_source.length => ', csv_source.length)
 //   return csv_source
 // }
 
 csv_source.forEach((el) => {
-  console.log("here");
-    console.log(el)
+//   console.log("here");
+//     console.log(el)
   for (let [key, value] of Object.entries(el)) {
     // key === 'ID' ? console.log(`${key}: ${value}`) : ''
     // console.log(`${key}: ${value}`)
@@ -191,7 +231,7 @@ csv_source.forEach((el) => {
   // );
 });
 
-makeZones()
+makeZones(csv_source)
 }
 
 /*================================================================================
