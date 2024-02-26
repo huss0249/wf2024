@@ -184,7 +184,7 @@ csv_source.forEach((el) => {
       $btn.classList.add("m-2", "p-1", "bg-success");
 
       $btn.textContent = el["Description"];
-      console.log('el["Description"] => ', el["Description"])
+      // console.log('el["Description"] => ', el["Description"])
       // ? console.log(`${key}: ${value}`) : ''
       el["Next"]
         ? ($btn.dataset.next = el["Next"])
