@@ -156,19 +156,19 @@ $myGrid.append(zFragment);
 }
 
 //================================================================================
-const getCount = (arr, vkey, vval) => {
-  console.log(vkey, vval)
-// const getCount = (arr, key) => {
-/* let res = arr.filter((obj) => {
+const keyCount = (arr_flag, key_flag, val_flag) => {
+  console.log(key_flag, val_flag)
+// const keyCount = (arr_flag, key) => {
+/* let res = arr_flag.filter((obj) => {
   return obj.Phase === 'DESIGN'
   // return obj.key
 }).length; */
-// let res = arr.filter((obj) => { return obj.Phase === 'DESIGN'}).length;
-// let res = arr.filter((obj) => { return obj.Phase === 'DESIGN'});
+// let res = arr_flag.filter((obj) => { return obj.Phase === 'DESIGN'}).length;
+// let res = arr_flag.filter((obj) => { return obj.Phase === 'DESIGN'});
 
-// let res = arr.filter((obj) => { return obj[`${vkey}`] === `${vval}`});
+// let res = arr_flag.filter((obj) => { return obj[`${key_flag}`] === `${val_flag}`});
 let res = ''
-vval ? res = arr.filter((obj) => { return obj[`${vkey}`] === `${vval}`}) : res = arr.filter((obj) => { return obj[`${vkey}`]})
+val_flag ? res = arr_flag.filter((obj) => { return obj[`${key_flag}`] === `${val_flag}`}) : res = arr_flag.filter((obj) => { return obj[`${key_flag}`]})
 // console.log('res => ', res)
 console.log('res => ', res.length)
 // return res
@@ -193,8 +193,8 @@ const update_src = (flag) => {
 //   return obj;
 // }, {})
 
-// let ress = getCount(flag, 'Phase', 'DESIGN')
-let ress = getCount(flag, 'Phase')
+// let ress = keyCount(flag, 'Phase', 'DESIGN')
+let ress = keyCount(flag, 'Phase')
 // console.log('ress => ', ress.length);
 console.log('ress => ', ress);
 
