@@ -156,6 +156,24 @@ $myGrid.append(zFragment);
 }
 
 //================================================================================
+const getCount = (arr, vkey, vval) => {
+  console.log(vkey, vval)
+// const getCount = (arr, key) => {
+/* let res = arr.filter((obj) => {
+  return obj.Phase === 'DESIGN'
+  // return obj.key
+}).length; */
+// let res = arr.filter((obj) => { return obj.Phase === 'DESIGN'}).length;
+// let res = arr.filter((obj) => { return obj.Phase === 'DESIGN'});
+
+// let res = arr.filter((obj) => { return obj[`${vkey}`] === `${vval}`});
+let res = ''
+vval ? res = arr.filter((obj) => { return obj[`${vkey}`] === `${vval}`}) : res = arr.filter((obj) => { return obj[`${vkey}`]})
+// console.log('res => ', res)
+console.log('res => ', res.length)
+// return res
+return res.length
+}
 
 //================================================================================
 const fragment = new DocumentFragment();
@@ -170,12 +188,25 @@ const update_src = (flag) => {
 //   return csv_source
 // }
 
+// const res = csv_source.reduce((obj, v) => {
+//   obj[v.Function] = (obj[v.Function] || 0) + 1;
+//   return obj;
+// }, {})
+
+// let ress = getCount(flag, 'Phase', 'DESIGN')
+let ress = getCount(flag, 'Phase')
+// console.log('ress => ', ress.length);
+console.log('ress => ', ress);
+
+
 csv_source.forEach((el) => {
 //   console.log("here");
-//     console.log(el)
+    // console.log(el["Phase"])
   for (let [key, value] of Object.entries(el)) {
     // key === 'ID' ? console.log(`${key}: ${value}`) : ''
     // console.log(`${key}: ${value}`)
+
+    // console.log(key)
 
     if (key === "ID") {
       const $btn = document.createElement("button");
