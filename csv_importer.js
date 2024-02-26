@@ -36,35 +36,21 @@ const keyMap = (arr_flag, key_flag, val_flag) => {
   return result
 }
 
-
-/* const getNumberOfSteps = () => {
-
-  const res = flag.reduce(function(obj, v) {
-    // increment or set the property
-    // `(obj[v.status] || 0)` returns the property value if defined
-    // or 0 ( since `undefined` is a falsy value
-    obj[v.Function] = (obj[v.Function] || 0) + 1;
-    // return the updated object
+const keyMin = (arr_flag, key_flag) => {
+  let res = arr_flag.reduce((obj, el) => {
+    obj[el[`${key_flag}`]] = (obj[el[`${key_flag}`]] || 0) + 1;
+    // console.log('obj ====> ', obj)
     return obj;
-    // set the initial value as an object
   }, {})
-  console.log('RES =====>', res)
+  // console.log('RES =====>', res)
+  // console.log(Object.keys(res));
 
-  const max = Math.max.apply(null, Object.values(res));
-  console.log(max) // 5
-} */
-
-// const keyMax = (arr_flag, key_flag) => {
-//   let res = arr_flag.reduce(function(obj, el) {
-//     obj[el[`${key_flag}`]] = (obj[el[`${key_flag}`]] || 0) + 1;
-//     return obj;
-//   }, {})
-//   console.log('RES =====>', res)
-
-//   const max = Math.max.apply(null, Object.values(res));
-//   console.log(max)
-//   return max
-// }
+  // const max = Math.max.apply(null, Object.values(res));
+  // console.log('min ====> ', max)
+  // return max
+  const aa = Object.keys(res)
+  return aa
+}
 
 const keyMax = (arr_flag, key_flag) => {
   let res = arr_flag.reduce((obj, el) => {
@@ -174,12 +160,13 @@ const update_src = (flag) => {
   console.log('ress => ', ress);
 
   // let ressm = keyMap(flag, 'Phase', 'DESIGN')
-  let ressm = keyMap(flag, 'Phase')
-  console.log('ressm => ', ressm.length);
-  console.log('ressm => ', ressm);
+  // let ressm = keyMap(flag, 'Phase')
+  // console.log('ressm => ', ressm.length);
+  // console.log('ressm => ', ressm);
 
-  zones = keyMap(flag, 'Phase')
-  console.log('zones => ', zones.length);
+  // zones = keyMap(flag, 'Phase')
+  zones = keyMin(flag, 'Function')
+  // console.log('zones => ', zones.length);
   console.log('zones => ', zones);
 
   // steps = keyCount(flag, 'Function')
