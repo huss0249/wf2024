@@ -37,17 +37,14 @@ const keyMap = (arr_flag, key_flag, val_flag) => {
 }
 
 const keyMin = (arr_flag, key_flag) => {
+  
   let res = arr_flag.reduce((obj, el) => {
     obj[el[`${key_flag}`]] = (obj[el[`${key_flag}`]] || 0) + 1;
     // console.log('obj ====> ', obj)
     return obj;
   }, {})
-  // console.log('RES =====>', res)
-  // console.log(Object.keys(res));
-
-  // const max = Math.max.apply(null, Object.values(res));
-  // console.log('min ====> ', max)
-  // return max
+  
+  console.log('res =======>>>>>> ', res)
   const aa = Object.keys(res)
   return aa
 }
