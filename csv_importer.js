@@ -90,7 +90,7 @@ const $myGrid = document.querySelector("#myGrid")
 $myGrid.classList.add(`p-${spacing}`, "d-flex", "flex-row", `gap-${spacing}`)
 //================================================================================
 //================================================================================
-const makeLanes = (flag, steps_flag) => {
+const makeLanes = () => {
   let zFragment = new DocumentFragment()
   let bFragment = new DocumentFragment()
 
@@ -106,7 +106,7 @@ const makeLanes = (flag, steps_flag) => {
       `bg-${modes[index]}`
     )
 
-    for (let j = 1; j < steps_flag + 1; j++) {
+    for (let j = 1; j < steps + 1; j++) {
       const $step = document.createElement("div")
       $step.id = j
 
@@ -192,7 +192,7 @@ const update_src = (csvData) => {
     //   document.querySelector(`#${too}`)
     // )
   })
-  makeLanes(csvData, steps)
+  makeLanes()
 }
 
 /*================================================================================
