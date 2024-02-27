@@ -98,7 +98,8 @@ const makeLanes = () => {
   let zFragment = new DocumentFragment()
   let bFragment = new DocumentFragment()
 
-  lanes.forEach((lane, index, lanes) => {
+  // lanes.forEach((lane, index, lanes) => {
+  lanes.forEach((lane, index) => {
     const $lane = document.createElement("div")
     $lane.id = lane
     $lane.classList.add(
@@ -112,7 +113,8 @@ const makeLanes = () => {
 
     for (let j = 1; j < steps + 1; j++) {
       const $step = document.createElement("div")
-      $step.id = j
+      // $step.id = j
+      $step.id = `${lane}${j}`
 
       j < modes.length + 1
       ? $step.classList.add(
@@ -130,7 +132,7 @@ const makeLanes = () => {
         `p-${spacing}`
       )
 
-      $step.textContent = `${lane}${j}`
+      // $step.textContent = `${lane}${j}`
       $step.dataset.address = `${lane}${j}`
       $step.dataset.lane = lane
       $step.dataset.step = j
@@ -140,6 +142,7 @@ const makeLanes = () => {
     zFragment.append($lane)  
   })
   $myGrid.append(zFragment)
+  return
 }
 //================================================================================
 const fragment = new DocumentFragment()
@@ -148,13 +151,15 @@ const csvExtract = (csvData) => {
   lanes = keyMin(csvData, 'Function')
   steps = keyMax(csvData, 'Function')
   
+  makeLanes()
+
   csvData.forEach((el) => {
     for (let [key, value] of Object.entries(el)) {
       if (key === "ID") {
         const $btn = document.createElement("button")
         $btn.id = value
         $btn.type = "button"
-        $btn.classList.add("m-2", "p-1", "bg-success")
+        $btn.classList.add("btn", "m-2", "p-1", "bg-success")
 
         $btn.textContent = el["Description"]
   
@@ -183,10 +188,18 @@ const csvExtract = (csvData) => {
           ? ($btn.dataset.connector = el["Connector"])
           : ($btn.dataset.connector = "default")
         el["Link"] ? ($btn.dataset.link = el["Link"]) : ""
-        fragment.append($btn)
+
+
+        let elPlace = document.querySelector(`#${el["Function"]}1`)
+        console.log('elPlace = ', elPlace)
+
+        // fragment.append($btn)
+        elPlace.append($btn)
       }
     }
-    $myGrid.append(fragment)
+    // $myGrid.append(fragment)
+
+
 
     //   let fromm = el["ID"]
     //   let too = el["Next"]
@@ -196,7 +209,7 @@ const csvExtract = (csvData) => {
     //   document.querySelector(`#${too}`)
     // )
   })
-  makeLanes()
+  // makeLanes()
 }
 
 /*================================================================================
