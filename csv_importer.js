@@ -18,6 +18,10 @@ let steps = 0
 let spacing = 3
 
 //================================================================================
+const $myGrid = document.querySelector("#myGrid")
+$myGrid.classList.add(`p-${spacing}`, "d-flex", "flex-row", `gap-${spacing}`)
+
+//================================================================================
 //================================================================================
 /* REUSABLE */
 //================================================================================
@@ -62,33 +66,33 @@ const keyMax = (arr_flag, key_flag) => {
 //================================================================================
 //================================================================================
 //================================================================================
-const readCSV = (e) => {
+const csvRead = (e) => {
+  const arr = e.target.result.toString().split(newline)
+  const headers = arr[0].split(delimiter)        
+  arr.forEach((el, index) => {
+      if (index > 0) {
+          const data = el.split(delimiter)
+          const object = {}
+          data.forEach((el, index) => { object[headers[index].trim()] = el.trim() })
+          csvData.push(object)
+      }
+  })
+  $myData.textContent = JSON.stringify(csvData)
+  csvExtract(csvData)
+}
+
+//================================================================================
+const csvGet = (e) => {
     const fr = new FileReader()
     fr.readAsText(fileInput.files[0])
-    
-    fr.addEventListener("load", (e) => {
-        const arr = e.target.result.toString().split(newline)
-        const headers = arr[0].split(delimiter)        
-        arr.forEach((el, index) => {
-            if (index > 0) {
-                const data = el.split(delimiter)
-                const object = {}
-                data.forEach((el, index) => { object[headers[index].trim()] = el.trim() })
-                csvData.push(object)
-            }
-        })
-        $myData.textContent = JSON.stringify(csvData)
-        update_src(csvData)
-    })
+    fr.addEventListener("load", csvRead)
 }
-myForm.addEventListener("change", readCSV)
+myForm.addEventListener("change", csvGet)
 //================================================================================
 
 
 //================================================================================
-const $myGrid = document.querySelector("#myGrid")
-$myGrid.classList.add(`p-${spacing}`, "d-flex", "flex-row", `gap-${spacing}`)
-//================================================================================
+
 //================================================================================
 const makeLanes = () => {
   let zFragment = new DocumentFragment()
@@ -140,7 +144,7 @@ const makeLanes = () => {
 //================================================================================
 const fragment = new DocumentFragment()
 
-const update_src = (csvData) => {
+const csvExtract = (csvData) => {
   lanes = keyMin(csvData, 'Function')
   steps = keyMax(csvData, 'Function')
   
