@@ -97,43 +97,25 @@ const drawLines = () => {
   const $btns = document.querySelectorAll('button')
   // console.log($btns)
   $btns.forEach((btn, index) => {
-    // console.log(btn.dataset.next)
-    
-  //   let a[`a${index}`] = new LeaderLine(
-  //     LeaderLine.mouseHoverAnchor(`${btn.id}`, "draw", {
-  //       animOptions: {
-  //         duration: 3000
-  //       }
-  //     }),
-  //     `${btn.dataset.next}`,
-  //     {
-  //       color: "red",
-  //       size: 4,
-  //       path: "grid",
-  //       startLabel: "START",
-  //       middleLabel: "MIDDLE",
-  //       endLabel: "END"
-  //     }
-  //   )
-  
-  
-  let lineFrom = document.querySelector(`#${btn.id}`)
-  let lineTo = document.querySelector(`#${btn.dataset.next}`)
 
-  // console.log(lineFrom, lineTo)
-// let btnLine = `a${index}`
+    console.log(btn.dataset.next)
+    // let lineFrom = document.querySelector(`#${btn.id}`)
+    // let lineTo = document.querySelector(`#${btn.dataset.next}`)
+    // console.log(lineFrom, lineTo)
 
-    window[`a${index}`] = new LeaderLine(lineFrom, lineTo,
-      {
-        color: "red",
-        size: 6,
-        path: "grid",
-        // startLabel: "START",
-        // middleLabel: "MIDDLE",
-        middleLabel: `${btn.dataset.function}`,
-        // endLabel: "END"
-      }
-    )
+    // window[`a${index}`] = new LeaderLine(lineFrom, lineTo,
+    //   {
+    //     color: "red",
+    //     size: 6,
+    //     path: "grid",
+    //     // startLabel: "START",
+    //     // middleLabel: "MIDDLE",
+    //     middleLabel: `${btn.dataset.function}`,
+    //     // endLabel: "END"
+    //   }
+    // )
+
+
   })
 }
 //================================================================================
