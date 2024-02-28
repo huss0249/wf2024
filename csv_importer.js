@@ -98,7 +98,7 @@ myForm.addEventListener("change", csvGet)
 
 //================================================================================
 //================================================================================
-const processLines = ($btn, nArr) => {
+const processLines = ($btn, nArr, cArr) => {
 
     if (nArr.length === 0) {
       let lineFrom = document.querySelector(`#${$btn.id}`)
@@ -111,8 +111,8 @@ const processLines = ($btn, nArr) => {
               {
                 // color: "red",
                 // size: 6,
-                path: "grid",
-                middleLabel: `${$btn.dataset.f}`,
+                path: "straight",
+                // middleLabel: `${$btn.dataset.f}`,
               }
       )
 
@@ -130,8 +130,8 @@ const processLines = ($btn, nArr) => {
                 {
                   // color: "red",
                   // size: 6,
-                  path: "grid",
-                  middleLabel: `${cArr[index]}`,
+                  path: "straight",
+                  // middleLabel: `${cArr[index]}`,
                 }
         )
 
@@ -146,13 +146,16 @@ const processLines = ($btn, nArr) => {
     // cArr = []
     return
 }
+//================================================================================
+//================================================================================
+//================================================================================
 
 
 const drawLines = () => {
   const $btns = document.querySelectorAll('button')
   
   $btns.forEach(($btn, index) => {
-    
+    $btn.classList.add('zIndex')
     if ($btn.dataset.n) {
       if ( $btn.dataset.n.includes(' | ') ) {
         nArr = $btn.dataset.n.split(' | ')
@@ -162,7 +165,7 @@ const drawLines = () => {
         nArr.push($btn.dataset.n)
         console.log('nArr => ', nArr)
       }
-      processLines($btn, nArr)
+      processLines($btn, nArr, cArr)
     }
     
     if ($btn.dataset.c) {
