@@ -19,6 +19,9 @@ let modes = ["warning", "success", "secondary", "danger", "primary"]
 let steps = 0
 let spacing = 3
 
+let connectorArray = []
+let nextArray = []
+
 //================================================================================
 const $myGrid = document.querySelector("#myGrid")
 $myGrid.classList.add(`p-${spacing}`, "d-flex", "flex-row", `gap-${spacing}`)
@@ -98,11 +101,52 @@ myForm.addEventListener("change", csvGet)
 const drawLines = () => {
   const $btns = document.querySelectorAll('button')
   // console.log($btns)
-  $btns.forEach((btn, index) => {
+  $btns.forEach(($btn, index) => {
+    
+    
+    /*     if ( el["Connector"] ) {
+      if ( el["Connector"].includes(' | ') ) {
+        el["Connector"] = el["Connector"].split(' | ')
+        console.log('el["Connector"] => ', el["Connector"])
+        
+        el["Next"] = el["Next"].split(' | ')
+        console.log('el["Next"] => ', el["Next"])
+      }
+      $btn.dataset.connector = el["Connector"]
+      $btn.dataset.next = el["Next"]
+      
+      console.log('btn.dataset.connector => ', $btn.dataset.connector)
+      console.log('btn.dataset.next => ', $btn.dataset.next)
+    } */
 
-    console.log(btn.dataset.next)
-    // let lineFrom = document.querySelector(`#${btn.id}`)
-    // let lineTo = document.querySelector(`#${btn.dataset.next}`)
+    
+    
+    if ($btn.dataset.next) {
+      if ( $btn.dataset.next.includes(' | ') ) {
+        nextArray = $btn.dataset.next.split(' | ')
+        console.log('nextArray => ', nextArray)
+      } else {
+        // nextArray = $btn.dataset.next.push
+        nextArray.push($btn.dataset.next)
+        console.log('nextArray => ', nextArray)
+      }
+    }
+    
+    if ($btn.dataset.connector) {
+      if ( $btn.dataset.connector.includes(' | ') ) {
+        connectorArray = $btn.dataset.connector.split(' | ')
+        console.log('connectorArray => ', connectorArray)
+      } else {
+        connectorArray.push($btn.dataset.connector)
+        console.log('connectorArray => ', connectorArray)
+      }
+    }
+
+    console.log('$btn.dataset.next => ', $btn.dataset.next)
+
+
+    // let lineFrom = document.querySelector(`#${$btn.id}`)
+    // let lineTo = document.querySelector(`#${$btn.dataset.next}`)
     // console.log(lineFrom, lineTo)
 
     // window[`a${index}`] = new LeaderLine(lineFrom, lineTo,
@@ -114,13 +158,60 @@ const drawLines = () => {
         path: "grid",
         // startLabel: "START",
         // middleLabel: "MIDDLE",
-        middleLabel: `${btn.dataset.function}`,
+        middleLabel: `${$btn.dataset.function}`,
         // endLabel: "END"
       }
     )
     */
 
 
+    if (nextArray.length === 0) {
+      let lineFrom = document.querySelector(`#${$btn.id}`)
+      let lineTo = document.querySelector(`#${$btn.dataset.next}`)
+      console.log(lineFrom, lineTo)
+
+      $lines[`a${index}`] = new LeaderLine(
+        lineFrom,
+        lineTo,
+              {
+                color: "red",
+                size: 6,
+                path: "grid",
+                // startLabel: "START",
+                // middleLabel: "MIDDLE",
+                middleLabel: `${$btn.dataset.function}`,
+                // endLabel: "END"
+              }
+      )
+    } else {
+      let lineFrom = document.querySelector(`#${$btn.id}`)
+
+      nextArray.forEach( (_n, index) => {
+
+        let lineTo = document.querySelector(`#${_n}`)
+        console.log(lineFrom, lineTo)
+  
+        $lines[`a${index}${_n}`] = new LeaderLine(
+          lineFrom,
+          lineTo,
+                {
+                  color: "red",
+                  size: 6,
+                  path: "grid",
+                  // startLabel: "START",
+                  // middleLabel: "MIDDLE",
+                  // middleLabel: `${$btn.dataset.function}`,
+                  middleLabel: `${connectorArray[index]}`,
+                  // endLabel: "END"
+                }
+        )
+
+      })
+
+    }
+
+    nextArray = []
+    connectorArray = []
   })
 }
 //================================================================================
@@ -197,36 +288,17 @@ const csvExtract = (csvData) => {
 
         $btn.textContent = el["Description"]
   
-        el["Next"]
-          ? ($btn.dataset.next = el["Next"])
-          : ($btn.dataset.next = "none")
+        
         el["Type"] ? ($btn.dataset.type = el["Type"]) : ""
         el["Function"] ? ($btn.dataset.function = el["Function"]) : ""
         el["Phase"] ? ($btn.dataset.phase = el["Phase"]) : ""
+        
+        el["Connector"] ? ($btn.dataset.connector = el["Connector"]) : ""
+        el["Next"] ? ($btn.dataset.next = el["Next"]) : ""
 
-        let mark
-        if ( el["Connector"] ) {
-          // mark = 'filled'
-          if ( el["Connector"].includes(' | ') ) {
-            // console.log(el["Connector"].split(' | '))
-            // console.log(el["Next"].split(' | '))
-            el["Connector"] = el["Connector"].split(' | ')
-            el["Next"] = el["Next"].split(' | ')
-            mark = 'double'
-          }
-        } else {
-            el["Connector"] = "empty"        
-        }
-
-        el["Connector"]
-          ? ($btn.dataset.connector = el["Connector"])
-          : ($btn.dataset.connector = "default")
         el["Link"] ? ($btn.dataset.link = el["Link"]) : ""
 
-
-        // let elPlace = document.querySelector(`#${el["Function"]}1`)
         let elPlace = document.querySelector(`#${el["Function"]}`)
-        // console.log('elPlace = ', elPlace)
 
         // fragment.append($btn)
         elPlace.append($btn)
