@@ -77,7 +77,7 @@ const csvRead = (e) => {
           csvData.push(object)
       }
   })
-  $myData.textContent = JSON.stringify(csvData)
+  // $myData.textContent = JSON.stringify(csvData)
   csvExtract(csvData)
 }
 
@@ -91,6 +91,52 @@ myForm.addEventListener("change", csvGet)
 //================================================================================
 
 
+//================================================================================
+//================================================================================
+const drawLines = () => {
+  const $btns = document.querySelectorAll('button')
+  // console.log($btns)
+  $btns.forEach((btn, index) => {
+    // console.log(btn.dataset.next)
+    
+  //   let a[`a${index}`] = new LeaderLine(
+  //     LeaderLine.mouseHoverAnchor(`${btn.id}`, "draw", {
+  //       animOptions: {
+  //         duration: 3000
+  //       }
+  //     }),
+  //     `${btn.dataset.next}`,
+  //     {
+  //       color: "red",
+  //       size: 4,
+  //       path: "grid",
+  //       startLabel: "START",
+  //       middleLabel: "MIDDLE",
+  //       endLabel: "END"
+  //     }
+  //   )
+  
+  
+  let lineFrom = document.querySelector(`#${btn.id}`)
+  let lineTo = document.querySelector(`#${btn.dataset.next}`)
+
+  // console.log(lineFrom, lineTo)
+// let btnLine = `a${index}`
+
+    window[`a${index}`] = new LeaderLine(lineFrom, lineTo,
+      {
+        color: "red",
+        size: 6,
+        path: "grid",
+        // startLabel: "START",
+        // middleLabel: "MIDDLE",
+        middleLabel: `${btn.dataset.function}`,
+        // endLabel: "END"
+      }
+    )
+  })
+}
+//================================================================================
 //================================================================================
 
 //================================================================================
@@ -111,34 +157,34 @@ const makeLanes = () => {
       `bg-${modes[index]}`
     )
 
-    for (let j = 1; j < steps + 1; j++) {
-      const $step = document.createElement("div")
-      // $step.id = j
-      $step.id = `${lane}${j}`
+    // for (let j = 1; j < steps + 1; j++) {
+    //   const $step = document.createElement("div")
+    //   // $step.id = j
+    //   $step.id = `${lane}${j}`
 
-      j < modes.length + 1
-      ? $step.classList.add(
-        "flex-fill",
-        `bg-${modes[j - 1]}`,
-        "text-dark",
-        "text-center",
-        `p-${spacing}`
-      )
-      : $step.classList.add(
-        "flex-fill",
-        "bg-light",
-        "text-dark",
-        "text-center",
-        `p-${spacing}`
-      )
+    //   j < modes.length + 1
+    //   ? $step.classList.add(
+    //     "flex-fill",
+    //     `bg-${modes[j - 1]}`,
+    //     "text-dark",
+    //     "text-center",
+    //     `p-${spacing}`
+    //   )
+    //   : $step.classList.add(
+    //     "flex-fill",
+    //     "bg-light",
+    //     "text-dark",
+    //     "text-center",
+    //     `p-${spacing}`
+    //   )
 
-      // $step.textContent = `${lane}${j}`
-      $step.dataset.address = `${lane}${j}`
-      $step.dataset.lane = lane
-      $step.dataset.step = j
-      bFragment.append($step)
-    }
-    $lane.append(bFragment)
+    //   // $step.textContent = `${lane}${j}`
+    //   $step.dataset.address = `${lane}${j}`
+    //   $step.dataset.lane = lane
+    //   $step.dataset.step = j
+    //   bFragment.append($step)
+    // }
+    // $lane.append(bFragment)
     zFragment.append($lane)  
   })
   $myGrid.append(zFragment)
@@ -159,7 +205,8 @@ const csvExtract = (csvData) => {
         const $btn = document.createElement("button")
         $btn.id = value
         $btn.type = "button"
-        $btn.classList.add("btn", "m-2", "p-1", "bg-success")
+        // $btn.classList.add("btn", "m-2", "p-1", "bg-success")
+        $btn.classList.add("btn", "m-2", "p-1", "bg-light")
 
         $btn.textContent = el["Description"]
   
@@ -190,8 +237,9 @@ const csvExtract = (csvData) => {
         el["Link"] ? ($btn.dataset.link = el["Link"]) : ""
 
 
-        let elPlace = document.querySelector(`#${el["Function"]}1`)
-        console.log('elPlace = ', elPlace)
+        // let elPlace = document.querySelector(`#${el["Function"]}1`)
+        let elPlace = document.querySelector(`#${el["Function"]}`)
+        // console.log('elPlace = ', elPlace)
 
         // fragment.append($btn)
         elPlace.append($btn)
@@ -210,6 +258,7 @@ const csvExtract = (csvData) => {
     // )
   })
   // makeLanes()
+  drawLines()
 }
 
 /*================================================================================
