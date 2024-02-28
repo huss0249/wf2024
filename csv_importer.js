@@ -11,7 +11,7 @@ const $lines = {}
 
 let lanes = []
 let connectors = []
-let types = []
+let ts = []
 let functions = []
 let phases = []
 let ranges = [2, 4, 7, 10]
@@ -228,14 +228,14 @@ const csvExtract = (csvData) => {
       if (key === "ID") {
         const $btn = document.createElement("button")
         $btn.id = value
-        $btn.type = "button"
+        $btn.t = "button"
         // $btn.classList.add("btn", "m-2", "p-1", "bg-success")
         $btn.classList.add("btn", "m-2", "p-1", "bg-light")
 
         $btn.textContent = el["Description"]
   
         
-        el["Type"] ? ($btn.dataset.type = el["Type"]) : ""
+        el["t"] ? ($btn.dataset.t = el["t"]) : ""
         el["f"] ? ($btn.dataset.f = el["f"]) : ""
         el["Phase"] ? ($btn.dataset.phase = el["Phase"]) : ""
         
