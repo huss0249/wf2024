@@ -7,6 +7,8 @@ const newline = "\r\n"
 //================================================================================
 let csvData = []
 //================================================================================
+const $lines = {}
+
 let lanes = []
 let connectors = []
 let types = []
@@ -104,16 +106,19 @@ const drawLines = () => {
     // console.log(lineFrom, lineTo)
 
     // window[`a${index}`] = new LeaderLine(lineFrom, lineTo,
-    //   {
-    //     color: "red",
-    //     size: 6,
-    //     path: "grid",
-    //     // startLabel: "START",
-    //     // middleLabel: "MIDDLE",
-    //     middleLabel: `${btn.dataset.function}`,
-    //     // endLabel: "END"
-    //   }
-    // )
+    /*
+    $lines[`a${index}`] = new LeaderLine(lineFrom, lineTo,
+      {
+        color: "red",
+        size: 6,
+        path: "grid",
+        // startLabel: "START",
+        // middleLabel: "MIDDLE",
+        middleLabel: `${btn.dataset.function}`,
+        // endLabel: "END"
+      }
+    )
+    */
 
 
   })
