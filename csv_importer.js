@@ -98,6 +98,56 @@ myForm.addEventListener("change", csvGet)
 
 //================================================================================
 //================================================================================
+const processLines = ($btn, nArr) => {
+
+    if (nArr.length === 0) {
+      let lineFrom = document.querySelector(`#${$btn.id}`)
+      let lineTo = document.querySelector(`#${$btn.dataset.n}`)
+      console.log(lineFrom, lineTo)
+
+      $lines[`a${index}`] = new LeaderLine(
+        lineFrom,
+        lineTo,
+              {
+                color: "red",
+                size: 6,
+                path: "grid",
+                middleLabel: `${$btn.dataset.f}`,
+              }
+      )
+
+    } else {
+      let lineFrom = document.querySelector(`#${$btn.id}`)
+
+      nArr.forEach( (_n, index) => {
+
+        let lineTo = document.querySelector(`#${_n}`)
+        console.log(lineFrom, lineTo)
+  
+        $lines[`a${index}${_n}`] = new LeaderLine(
+          lineFrom,
+          lineTo,
+                {
+                  color: "red",
+                  size: 6,
+                  path: "grid",
+                  middleLabel: `${cArr[index]}`,
+                }
+        )
+
+
+      })
+    }
+
+
+    
+
+    // nArr = []
+    // cArr = []
+    return
+}
+
+
 const drawLines = () => {
   const $btns = document.querySelectorAll('button')
   
@@ -112,6 +162,7 @@ const drawLines = () => {
         nArr.push($btn.dataset.n)
         console.log('nArr => ', nArr)
       }
+      processLines($btn, nArr)
     }
     
     if ($btn.dataset.c) {
@@ -146,43 +197,47 @@ const drawLines = () => {
     */
 
 
-    if (nArr.length === 0) {
-      let lineFrom = document.querySelector(`#${$btn.id}`)
-      let lineTo = document.querySelector(`#${$btn.dataset.n}`)
-      console.log(lineFrom, lineTo)
+    // if (nArr.length === 0) {
+    //   let lineFrom = document.querySelector(`#${$btn.id}`)
+    //   let lineTo = document.querySelector(`#${$btn.dataset.n}`)
+    //   console.log(lineFrom, lineTo)
 
-      $lines[`a${index}`] = new LeaderLine(
-        lineFrom,
-        lineTo,
-              {
-                color: "red",
-                size: 6,
-                path: "grid",
-                middleLabel: `${$btn.dataset.f}`,
-              }
-      )
-    } else {
-      let lineFrom = document.querySelector(`#${$btn.id}`)
+    //   $lines[`a${index}`] = new LeaderLine(
+    //     lineFrom,
+    //     lineTo,
+    //           {
+    //             color: "red",
+    //             size: 6,
+    //             path: "grid",
+    //             middleLabel: `${$btn.dataset.f}`,
+    //           }
+    //   )
 
-      nArr.forEach( (_n, index) => {
+    // } else {
+    //   let lineFrom = document.querySelector(`#${$btn.id}`)
 
-        let lineTo = document.querySelector(`#${_n}`)
-        console.log(lineFrom, lineTo)
+    //   nArr.forEach( (_n, index) => {
+
+    //     let lineTo = document.querySelector(`#${_n}`)
+    //     console.log(lineFrom, lineTo)
   
-        $lines[`a${index}${_n}`] = new LeaderLine(
-          lineFrom,
-          lineTo,
-                {
-                  color: "red",
-                  size: 6,
-                  path: "grid",
-                  middleLabel: `${cArr[index]}`,
-                }
-        )
+    //     $lines[`a${index}${_n}`] = new LeaderLine(
+    //       lineFrom,
+    //       lineTo,
+    //             {
+    //               color: "red",
+    //               size: 6,
+    //               path: "grid",
+    //               middleLabel: `${cArr[index]}`,
+    //             }
+    //     )
 
-      })
 
-    }
+    //   })
+    // }
+
+
+    
 
     nArr = []
     cArr = []
