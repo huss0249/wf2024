@@ -12,7 +12,7 @@ const $lines = {}
 let lanes = []
 let connectors = []
 let ts = []
-let functions = []
+let fs = []
 let phases = []
 let ranges = [2, 4, 7, 10]
 let modes = ["warning", "success", "secondary", "danger", "primary"]
@@ -218,8 +218,8 @@ const makeLanes = () => {
 const fragment = new DocumentFragment()
 
 const csvExtract = (csvData) => {
-  lanes = keyMin(csvData, 'Function')
-  steps = keyMax(csvData, 'Function')
+  lanes = keyMin(csvData, 'f')
+  steps = keyMax(csvData, 'f')
   
   makeLanes()
 
