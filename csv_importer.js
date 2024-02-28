@@ -109,8 +109,8 @@ const processLines = ($btn, nArr) => {
         lineFrom,
         lineTo,
               {
-                color: "red",
-                size: 6,
+                // color: "red",
+                // size: 6,
                 path: "grid",
                 middleLabel: `${$btn.dataset.f}`,
               }
@@ -128,8 +128,8 @@ const processLines = ($btn, nArr) => {
           lineFrom,
           lineTo,
                 {
-                  color: "red",
-                  size: 6,
+                  // color: "red",
+                  // size: 6,
                   path: "grid",
                   middleLabel: `${cArr[index]}`,
                 }
